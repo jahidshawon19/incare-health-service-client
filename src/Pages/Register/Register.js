@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 
@@ -17,8 +18,9 @@ const Register = () => {
     const [loginData, setLoginData] = useState({})
 
     const {authError,user, registerUser, isLoading} = useAuth()
+    const history = useHistory()
 
-    const handleOnChange = e =>{
+    const handleOnBlur = e =>{
         const field = e.target.name 
         const value = e.target.value 
 
@@ -32,7 +34,7 @@ const Register = () => {
             alert('Password Did Not Match')
             return 
         }
-        registerUser(loginData.email, loginData.password)
+        registerUser(loginData.email, loginData.password, loginData.fullName,  history)
         e.preventDefault()
     }
 
@@ -51,11 +53,18 @@ const Register = () => {
                         </Typography>
               {
                   !isLoading &&  <form onSubmit={handleLogin}>
-                  <TextField sx={{width:'65%', m:1}} id="standard-basic" type="email" label="Your Email" onChange={handleOnChange} name="email" variant="standard" />
 
-                  <TextField sx={{width:'65%', m:1}} id="standard-basic" label="Your Password" onChange={handleOnChange} name="password" type="password" variant="standard" />
+                  <TextField sx={{width:'65%', m:1}} id="standard-basic" type="email" label="Your Email" onBlur={handleOnBlur} name="email" variant="standard" />
 
-                  <TextField sx={{width:'65%', m:1}} id="standard-basic" label="Re-type Password" onChange={handleOnChange} name="password2" type="password" variant="standard" />
+
+                  <TextField sx={{width:'65%', m:1}} id="standard-basic"  label="Full Name" onBlur={handleOnBlur} name="fullName" variant="standard" />
+
+
+                
+
+                  <TextField sx={{width:'65%', m:1}} id="standard-basic" label="Your Password" onBlur={handleOnBlur} name="password" type="password" variant="standard" />
+
+                  <TextField sx={{width:'65%', m:1}} id="standard-basic" label="Re-type Password" onBlur={handleOnBlur} name="password2" type="password" variant="standard" />
 
                   <Button sx={{width:'65%', m:1, }} color="warning" type="submit"  variant="contained">Confirm Registration</Button>
                   <p>Already Registered? <Link to="/login" ><Button sx={{color:'green'}} color="inherit">Login Now</Button></Link> </p>

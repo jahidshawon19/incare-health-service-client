@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
-
+import useAuth from '../../../hooks/useAuth'
 
 const style = {
     position: 'absolute',
@@ -24,6 +24,8 @@ const style = {
 const BookingModal = ({ openModal, handleCloseModal, bookingData, date}) => {
 
     const {doctorName, time, departmentName} = bookingData  // destructuring 
+
+    const {user} = useAuth()
 
 
     const handleBookingSubmit = e => {
@@ -60,21 +62,21 @@ const BookingModal = ({ openModal, handleCloseModal, bookingData, date}) => {
                 
                 sx={{width:"90%", m:1}}
                 id="outlined-size-small"
-                defaultValue="Patient Name"
+                defaultValue={user.displayName}
                 size="small"
                 />
                 <TextField
                 
                 sx={{width:"90%", m:1}}
                 id="outlined-size-small"
-                defaultValue="Mobile No"
+                defaultValue="Mobile Number"
                 size="small"
                 />
                 <TextField
                
                 sx={{width:"90%", m:1}}
                 id="outlined-size-small"
-                defaultValue="Email"
+                defaultValue={user.email}
                 size="small"
                 />
                 <TextField

@@ -14,7 +14,7 @@ const Login = () => {
 
     const [loginData, setLoginData] = useState({})
 
-    const {authError,user, loginUser, isLoading} = useAuth()
+    const {authError,user, loginUser, isLoading, signInWithGoogle} = useAuth()
 
     const location = useLocation()
     const history = useHistory()
@@ -34,6 +34,13 @@ const Login = () => {
         e.preventDefault()
     }
 
+    const handleGoogleSignIn = (location, history) =>{
+        signInWithGoogle()
+    }
+
+
+
+
 
 
     return (
@@ -44,11 +51,14 @@ const Login = () => {
                             Login
                         </Typography>
                         <form onSubmit={handleLogin}>
-                        <TextField sx={{width:'65%', m:1}} id="standard-basic" label="Your Email" onChange={handleOnChange} name="email" variant="standard" />
-                        <TextField sx={{width:'65%', m:1}} id="standard-basic" label="Your Password" onChange={handleOnChange} name="password" type="password" variant="standard" />
+                        <TextField sx={{width:'65%', m:1}} id="standard-basic" label="Your Email" onBlur={handleOnChange} name="email" variant="standard" />
+                        <TextField sx={{width:'65%', m:1}} id="standard-basic" label="Your Password" onBlur={handleOnChange} name="password" type="password" variant="standard" />
                         <Button sx={{width:'65%', m:1}} type="submit" color="info" variant="contained">Login</Button>
                         <p>Are You New Here? <Link to="/register" ><Button color="inherit" sx={{color:'green'}}>Be Register</Button></Link> </p>
                         </form>
+
+                     
+                         <Button sx={{width:'65%', m:1}} onClick={handleGoogleSignIn} color="primary" variant="contained">  <img src="https://www.pngall.com/wp-content/uploads/5/Google-G-Logo-PNG-Image.png" style={{width:"25px", height:"25px"}} /> Sign in with Google </Button>
 
 
                         {
