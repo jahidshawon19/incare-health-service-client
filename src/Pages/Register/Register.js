@@ -26,6 +26,7 @@ const Register = () => {
 
         const newLoginData = {...loginData}
         newLoginData[field] = value 
+        console.log(newLoginData)
         setLoginData(newLoginData)
     }
 
@@ -34,7 +35,7 @@ const Register = () => {
             alert('Password Did Not Match')
             return 
         }
-        registerUser(loginData.email, loginData.password, loginData.fullName,  history)
+        registerUser(loginData.email, loginData.password, loginData.fullName, history)
         e.preventDefault()
     }
 
@@ -52,6 +53,7 @@ const Register = () => {
                             Registration
                         </Typography>
               {
+                   
                   !isLoading &&  <form onSubmit={handleLogin}>
 
                   <TextField sx={{width:'65%', m:1}} id="standard-basic" type="email" label="Your Email" onBlur={handleOnBlur} name="email" variant="standard" />
@@ -60,7 +62,6 @@ const Register = () => {
                   <TextField sx={{width:'65%', m:1}} id="standard-basic"  label="Full Name" onBlur={handleOnBlur} name="fullName" variant="standard" />
 
 
-                
 
                   <TextField sx={{width:'65%', m:1}} id="standard-basic" label="Your Password" onBlur={handleOnBlur} name="password" type="password" variant="standard" />
 

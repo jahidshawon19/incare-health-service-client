@@ -31,9 +31,10 @@ const useFirebase = () =>{
           setAuthError('')
           const newUser = {email, displayName: name,}
           setUser(newUser)
+          
           updateProfile(auth.currentUser, {
             displayName: name,
-           
+          
           })
           .then(() => {
            
@@ -41,6 +42,8 @@ const useFirebase = () =>{
           .catch((error) => {
          
           });
+
+
           history.replace('/')
         
           })
