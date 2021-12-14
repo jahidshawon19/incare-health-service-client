@@ -46,6 +46,8 @@ const BookingModal = ({ openModal, handleCloseModal, bookingData, date}) => {
 
 
     const handleBookingSubmit = e => {
+
+      // collect data 
   
       const appointment = {
          ...bookingInfo,
@@ -56,6 +58,22 @@ const BookingModal = ({ openModal, handleCloseModal, bookingData, date}) => {
 
       }
      
+
+      // send to the server 
+
+      fetch('http://localhost:5000/appointments', {
+
+      method: 'POST',
+      headers: {
+        'content-type':'application/json'
+      },
+      body:JSON.stringify(appointment)
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+      })
+
       console.log(appointment)
       
       e.preventDefault()
