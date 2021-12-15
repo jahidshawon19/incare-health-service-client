@@ -22,7 +22,7 @@ const style = {
 
 
 
-const BookingModal = ({ openModal, handleCloseModal, bookingData, date}) => {
+const BookingModal = ({ openModal, handleCloseModal, bookingData, date, setBookingSuccess}) => {
 
     const {doctorName, time, departmentName} = bookingData 
     const {user} = useAuth()
@@ -71,13 +71,17 @@ const BookingModal = ({ openModal, handleCloseModal, bookingData, date}) => {
       })
       .then(res => res.json())
       .then(data => {
-        console.log(data)
+        if(data.insertedId){
+          setBookingSuccess(true)
+          handleCloseModal()
+          
+        }
       })
 
-      console.log(appointment)
+      // console.log(appointment)
       
       e.preventDefault()
-      handleCloseModal()
+      
        
         
     }

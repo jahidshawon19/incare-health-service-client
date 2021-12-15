@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth'
+import { Box } from '@mui/material';
 
 const Navbar = () => {
 
@@ -35,7 +36,10 @@ const Navbar = () => {
 
     {
       user?.email ? 
-      <Button onClick={logOut} style={{color:'white', textDecoration:'none'}} color="inherit">Logout</Button>
+      <Box>
+          <Link style={{color:'white', textDecoration:'none'}} to="/dashboard"><Button color="inherit">Dashboard</Button></Link>
+        <Button onClick={logOut} style={{color:'white', textDecoration:'none'}} color="inherit">Logout</Button>
+      </Box>
       :
       <Link style={{color:'white', textDecoration:'none'}} to="/login"><Button color="inherit">Login</Button></Link>
 
