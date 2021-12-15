@@ -54,6 +54,7 @@ const BookingModal = ({ openModal, handleCloseModal, bookingData, date, setBooki
          time,
          doctorName,
          departmentName,
+         date,
         
 
       }

@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper';
 
 
 
-const Appointments = () => {
+const Appointments = ({date}) => {
     const {user} = useAuth()
     const [appointments, setAppointments] = useState([])
 
@@ -21,7 +21,7 @@ const Appointments = () => {
         fetch (url)
         .then(res => res.json())
         .then(data => setAppointments(data))
-    }, [])
+    }, [date])
 
 
 
@@ -36,6 +36,8 @@ const Appointments = () => {
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell align="right">Schedule</TableCell>
+            <TableCell align="right">Doctor</TableCell>
+            <TableCell align="right">Date</TableCell>
             <TableCell align="right">Action</TableCell>
  
           </TableRow>
@@ -51,6 +53,7 @@ const Appointments = () => {
               </TableCell>
               <TableCell align="right">{row.time}</TableCell>
               <TableCell align="right">{row.doctorName}</TableCell>
+              <TableCell align="right">{row.date}</TableCell>
  
             </TableRow>
           ))}
