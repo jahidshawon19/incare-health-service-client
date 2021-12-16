@@ -6,28 +6,36 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import { Link } from 'react-router-dom';
-import Calender from '../../Pages/Shared/Calender/Calender'
-import Appointments from './Appointments';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+
+
+import {
+
+  Switch,
+  Route,
+
+
+  useRouteMatch
+} from "react-router-dom";
+import DashboardHome from './DashboardHome';
+import AddDoctor from './AddDoctor';
+import AddService from './AddService';
+import MakeAdmin from './MakeAdmin';
+
 
 const drawerWidth = 200;
 
 function Dashboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  let { path, url } = useRouteMatch();
 
-  const [date, setDate] = React.useState(new Date())
+  
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -38,15 +46,21 @@ function Dashboard(props) {
       <Toolbar />
       <Divider />
       <List>
+        <Link style={{color:'coral', textDecoration:'none'}} to={`${url}`}><Button color="inherit">Dashboard</Button></Link>
     
-        <Link style={{color:'coral', textDecoration:'none'}} to="/appointment"><Button color="inherit">Appointment</Button></Link>
+        <Link style={{color:'coral', textDecoration:'none'}} to="/appointment"><Button color="inherit">Make Appointment</Button></Link>
+
+        <Link style={{color:'coral', textDecoration:'none'}} to={`${url}/addDoctor`}><Button color="inherit">Add Doctor</Button></Link>
+
+        <Link style={{color:'coral', textDecoration:'none'}} to={`${url}/addService`}><Button color="inherit">Add Service</Button></Link>
+        
+        <Link style={{color:'coral', textDecoration:'none'}} to={`${url}/makeAdmin`}><Button color="inherit">Make Admin</Button></Link>
+
+     
       
       </List>
 
-      <List>
-      <Link style={{color:'coral', textDecoration:'none'}} to="/home"><Button color="inherit">Home</Button></Link>
-      </List>
-     
+    
 
     </div>
   );
@@ -75,7 +89,7 @@ function Dashboard(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-           Dashboard
+             Welcome to Incare Health Service Dashboard
           </Typography>
         </Toolbar>
       </AppBar>
@@ -117,25 +131,20 @@ function Dashboard(props) {
       >
         <Toolbar />
         <Typography paragraph>
-        <Grid container spacing={3}>
-          
-            <Grid item xs={12} sm={5}>
-                <Calender
-                
-                date={date}
-                setDate={setDate}
-                
-                ></Calender>
-            </Grid>
-            <Grid item xs={12} md={7}>
-                <Appointments
-
-                    date={date}
-                
-                ></Appointments>
-            </Grid>
-            
-            </Grid>
+            <Switch>
+            <Route exact path={path}>
+              <DashboardHome></DashboardHome>
+            </Route>
+            <Route path={`${path}/addDoctor`}>
+              <AddDoctor></AddDoctor>
+            </Route>
+            <Route path={`${path}/addService`}>
+              <AddService></AddService>
+            </Route>
+            <Route path={`${path}/makeAdmin`}>
+              <MakeAdmin></MakeAdmin>
+            </Route>
+          </Switch>
         </Typography>
        
       </Box>
