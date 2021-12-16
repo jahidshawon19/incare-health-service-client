@@ -16,10 +16,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-
+import { Link } from 'react-router-dom';
 import Calender from '../../Pages/Shared/Calender/Calender'
 import Appointments from './Appointments';
-
+import Button from '@mui/material/Button';
 
 const drawerWidth = 200;
 
@@ -38,14 +38,13 @@ function Dashboard(props) {
       <Toolbar />
       <Divider />
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+    
+        <Link style={{color:'coral', textDecoration:'none'}} to="/appointment"><Button color="inherit">Appointment</Button></Link>
+      
+      </List>
+
+      <List>
+      <Link style={{color:'coral', textDecoration:'none'}} to="/home"><Button color="inherit">Home</Button></Link>
       </List>
      
 

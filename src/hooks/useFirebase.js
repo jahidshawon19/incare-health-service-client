@@ -20,7 +20,7 @@ const useFirebase = () =>{
 
 
 
-    // REGISTER FUNCTION START // 
+    //################################### REGISTER FUNCTION START #################################################// 
 
     const registerUser = (email, password, name, history) =>{
       setIsLoading(true)
@@ -31,6 +31,11 @@ const useFirebase = () =>{
           setAuthError('')
           const newUser = {email, displayName: name,}
           setUser(newUser)
+
+          
+
+          saveUser(email, name, 'POST') // CALL SAVE USER FUNCTION TO STORE IT IN THE DATABASE
+
           
           updateProfile(auth.currentUser, {
             displayName: name,
@@ -56,10 +61,12 @@ const useFirebase = () =>{
           .finally( ()=> setIsLoading(false));
     }
 
-   // REGISTER FUNCTION END // 
+   // ################################################# REGISTER FUNCTION END  ####################################// 
 
 
-   // LOGIN FUNCTION START // 
+ 
+
+   // ################################################ LOGIN FUNCTION START ################################################# // 
 
     const loginUser = (email, password, location, history) =>{
         setIsLoading(true)
@@ -79,13 +86,13 @@ const useFirebase = () =>{
     }
 
 
-   // LOGIN FUNCTION END // 
+   // ################################################ LOGIN FUNCTION END ################################################## // 
 
 
 
 
 
-   // GOOGLE SIGN IN START 
+   // #################################################### GOOGLE SIGN IN START ###################################### // 
 
     const signInWithGoogle= (location, history) =>{
       setIsLoading(true)
@@ -93,8 +100,10 @@ const useFirebase = () =>{
       .then((result) => {
       
         const user = result.user;
+        saveUser(user.email, user.displayName, 'PUT') // CALL SAVE USER FUNCTION TO STORE IT IN THE DATABASE
+     
+        
         setAuthError('')
-    
       }).catch((error) => {
        
         setAuthError(error.message);
@@ -102,16 +111,13 @@ const useFirebase = () =>{
       .finally( ()=> setIsLoading(false));
     }
 
-    
 
-
-
-   // GOOGLE SIGN IN END 
+   // ####################################################### GOOGLE SIGN IN END ####################################### // 
 
 
 
 
-    // OBSERVER USER STATE START 
+    // ############################################### OBSERVER USER STATE START ################################### //
 
     useEffect( ()=>{
         const unSubscribe = onAuthStateChanged(auth, (user) => {
@@ -130,7 +136,7 @@ const useFirebase = () =>{
           return () => unSubscribe
     }, [])
 
-  // OBSERVER USER STATE END 
+  // ##################################################### OBSERVER USER STATE END ################################# // 
 
 
   //  SIGNOUT FUNCTION START 
@@ -149,6 +155,32 @@ const useFirebase = () =>{
       //  SIGNOUT FUNCTION END 
 
 
+
+
+
+        // SAVE USER FUNCTION START 
+
+   const saveUser = (email, displayName, method) =>{
+
+    const user = {email, displayName} // just create a user object here 
+
+    fetch('http://localhost:5000/users', {
+
+    method: method,
+    headers: {
+      'content-type':'application/json'
+    },
+    body:JSON.stringify(user)
+    })
+
+    
+ }
+
+
+        // SAVE USER FUNCTION END
+
+
+  
 
 
 
