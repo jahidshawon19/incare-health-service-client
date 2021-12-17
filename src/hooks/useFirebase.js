@@ -12,6 +12,7 @@ const useFirebase = () =>{
     const [user, setUser] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const [authError, setAuthError] = useState('')
+    const [admin, setAdmin] = useState(false)
  
 
     
@@ -139,6 +140,17 @@ const useFirebase = () =>{
   // ##################################################### OBSERVER USER STATE END ################################# // 
 
 
+  useEffect(() =>{
+    fetch(`http://localhost:5000/users/${user.email}`)
+    .then(res => res.json())
+    .then(data => setAdmin(data.admin))
+  },[user.email])
+
+
+
+
+
+
   //  SIGNOUT FUNCTION START 
 
     const logOut = () =>{
@@ -187,6 +199,7 @@ const useFirebase = () =>{
 
     return {
         user,
+        admin,
         registerUser,
         logOut,
         loginUser,

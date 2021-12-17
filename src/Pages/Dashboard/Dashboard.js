@@ -26,16 +26,21 @@ import DashboardHome from './DashboardHome';
 import AddDoctor from './AddDoctor';
 import AddService from './AddService';
 import MakeAdmin from './MakeAdmin';
+import useAuth from '../../hooks/useAuth';
+
+
 
 
 const drawerWidth = 200;
 
 function Dashboard(props) {
+
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   let { path, url } = useRouteMatch();
+  const {admin} = useAuth()
 
-  
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -50,13 +55,18 @@ function Dashboard(props) {
     
         <Link style={{color:'coral', textDecoration:'none'}} to="/appointment"><Button color="inherit">Make Appointment</Button></Link>
 
-        <Link style={{color:'coral', textDecoration:'none'}} to={`${url}/addDoctor`}><Button color="inherit">Add Doctor</Button></Link>
+    
+      { admin &&
+         <Box>
+             <Link style={{color:'coral', textDecoration:'none'}} to={`${url}/addDoctor`}><Button color="inherit">Add Doctor</Button></Link>
 
-        <Link style={{color:'coral', textDecoration:'none'}} to={`${url}/addService`}><Button color="inherit">Add Service</Button></Link>
+            <Link style={{color:'coral', textDecoration:'none'}} to={`${url}/addService`}><Button color="inherit">Add Service</Button></Link>
+
+            <Link style={{color:'coral', textDecoration:'none'}} to={`${url}/makeAdmin`}><Button color="inherit">Make Admin</Button></Link>
+        </Box>
+
+      }
         
-        <Link style={{color:'coral', textDecoration:'none'}} to={`${url}/makeAdmin`}><Button color="inherit">Make Admin</Button></Link>
-
-     
       
       </List>
 
