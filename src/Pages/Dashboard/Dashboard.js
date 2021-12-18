@@ -14,19 +14,13 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
 
-import {
-
-  Switch,
-  Route,
-
-
-  useRouteMatch
-} from "react-router-dom";
+import {Switch,Route,useRouteMatch} from "react-router-dom";
 import DashboardHome from './DashboardHome';
 import AddDoctor from './AddDoctor';
 import AddService from './AddService';
 import MakeAdmin from './MakeAdmin';
 import useAuth from '../../hooks/useAuth';
+import AdminRoute from '../../Pages/AdminRoute/AdminRoute'
 
 
 
@@ -39,7 +33,7 @@ function Dashboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   let { path, url } = useRouteMatch();
-  const {admin} = useAuth()
+  const {admin, user} = useAuth()
 
 
   const handleDrawerToggle = () => {
@@ -49,20 +43,22 @@ function Dashboard(props) {
   const drawer = (
     <div>
       <Toolbar />
-      <Divider />
-      <List>
-        <Link style={{color:'coral', textDecoration:'none'}} to={`${url}`}><Button color="inherit">Dashboard</Button></Link>
+      
     
-        <Link style={{color:'coral', textDecoration:'none'}} to="/appointment"><Button color="inherit">Make Appointment</Button></Link>
+      <List>
+      <h4 style={{color:'crimson'}}>User: {user.displayName}</h4>
+        <Link style={{color:'darkcyan', textDecoration:'none'}} to={`${url}`}><Button color="inherit">Dashboard</Button></Link>
+    
+        <Link style={{color:'darkcyan', textDecoration:'none'}} to="/appointment"><Button color="inherit">Make Appointment</Button></Link>
 
     
       { admin &&
          <Box>
-             <Link style={{color:'coral', textDecoration:'none'}} to={`${url}/addDoctor`}><Button color="inherit">Add Doctor</Button></Link>
+             <Link style={{color:'darkcyan', textDecoration:'none'}} to={`${url}/addDoctor`}><Button color="inherit">Add Doctor</Button></Link>
 
-            <Link style={{color:'coral', textDecoration:'none'}} to={`${url}/addService`}><Button color="inherit">Add Service</Button></Link>
+            <Link style={{color:'darkcyan', textDecoration:'none'}} to={`${url}/addService`}><Button color="inherit">Add Service</Button></Link>
 
-            <Link style={{color:'coral', textDecoration:'none'}} to={`${url}/makeAdmin`}><Button color="inherit">Make Admin</Button></Link>
+            <Link style={{color:'darkcyan', textDecoration:'none'}} to={`${url}/makeAdmin`}><Button color="inherit">Make Admin</Button></Link>
         </Box>
 
       }
@@ -145,15 +141,16 @@ function Dashboard(props) {
             <Route exact path={path}>
               <DashboardHome></DashboardHome>
             </Route>
-            <Route path={`${path}/addDoctor`}>
+            <AdminRoute path={`${path}/addDoctor`}>
               <AddDoctor></AddDoctor>
-            </Route>
-            <Route path={`${path}/addService`}>
+            </AdminRoute>
+            <AdminRoute path={`${path}/addService`}>
               <AddService></AddService>
-            </Route>
-            <Route path={`${path}/makeAdmin`}>
+            </AdminRoute>
+            <AdminRoute path={`${path}/makeAdmin`}>
               <MakeAdmin></MakeAdmin>
-            </Route>
+            </AdminRoute>
+            
           </Switch>
         </Typography>
        

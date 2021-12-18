@@ -37,6 +37,7 @@ const Appointments = ({date}) => {
             <TableCell>Name</TableCell>
             <TableCell align="right">Schedule</TableCell>
             <TableCell align="right">Doctor</TableCell>
+            <TableCell align="right">Department</TableCell>
             <TableCell align="right">Date</TableCell>
            
  
@@ -53,6 +54,7 @@ const Appointments = ({date}) => {
               </TableCell>
               <TableCell align="right">{row.time}</TableCell>
               <TableCell align="right">{row.doctorName}</TableCell>
+              <TableCell align="right">{row.departmentName}</TableCell>
               <TableCell align="right">{row.date}</TableCell>
  
             </TableRow>
