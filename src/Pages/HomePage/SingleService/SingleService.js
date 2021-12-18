@@ -2,16 +2,17 @@
 import React from 'react';
 import './SingleService.css'
 import Button from '@mui/material/Button';
-
+import serviceImg from '../../../images/1-11281_healthcare-clipart-personal-care-service-caring-clipart-hd.png'
+import { Link } from 'react-router-dom';
 
 const SingleService = (props) => {
-    const {name, image} = props.serviceData
+    const {serviceName, _id} = props.serviceData
     return (
         <div className="column">
             <div className="card">
-                <img src={image} alt="" />
-                <h3>{name}</h3>
-                <Button variant="contained">Details</Button>
+                <img src={serviceImg} alt="" />
+                <h3>{serviceName}</h3>
+                <Link to={`service_details/${_id}`}><Button variant="contained">Details</Button></Link>
             </div>
         </div>
     );

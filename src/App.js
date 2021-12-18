@@ -8,6 +8,8 @@ import Register from './Pages/Register/Register';
 import AuthProvider from './context/AuthProvider/AuthProvider';
 import PrivateRoute from './Pages/PrivateRoute/PrivateRoute';
 import Dashboard from './Pages/Dashboard/Dashboard'
+import DoctorDetails from './Pages/DoctorDetails/DoctorDetails';
+import ServiceDetails from './Pages/ServiceDetails/ServiceDetails';
 function App() {
   return (
     <div className="App">
@@ -22,6 +24,18 @@ function App() {
               <Home></Home>
             </Route>
 
+             <Route  path="/doctor_details/:id">
+              <DoctorDetails></DoctorDetails>
+            </Route>
+
+            <Route  path="/service_details/:id">
+              <ServiceDetails></ServiceDetails>
+            </Route>
+
+
+           
+
+
             <PrivateRoute path="/appointment">
             <Appointment></Appointment>
             </PrivateRoute>
@@ -30,6 +44,9 @@ function App() {
             <PrivateRoute path="/dashboard">
             <Dashboard></Dashboard>
             </PrivateRoute>
+
+
+            
 
 
             <Route  path="/login">
