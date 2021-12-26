@@ -27,7 +27,7 @@ const AddDoctor = () => {
 
 
         
-        fetch('http://localhost:5000/doctors', {
+        fetch('https://whispering-springs-94088.herokuapp.com/doctors', {
             method:'POST',
             headers:{
                 'content-type':'application/json'

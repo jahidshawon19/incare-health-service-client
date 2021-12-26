@@ -8,7 +8,7 @@ const DoctorDetails = () => {
     const {id} = useParams()
 
     useEffect(() =>{
-        const url = `http://localhost:5000/doctors/${id}`
+        const url = `hhttps://whispering-springs-94088.herokuapp.com/doctors/${id}`
         fetch(url)
         .then(res => res.json())
         .then(data =>setDoctor(data))

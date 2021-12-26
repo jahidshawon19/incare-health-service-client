@@ -17,7 +17,7 @@ const Appointments = ({date}) => {
 
 
     useEffect( ()=>{
-        const url = `http://localhost:5000/appointments?email=${user.email}`
+        const url = `https://whispering-springs-94088.herokuapp.com/appointments?email=${user.email}`
         fetch (url)
         .then(res => res.json())
         .then(data => setAppointments(data))

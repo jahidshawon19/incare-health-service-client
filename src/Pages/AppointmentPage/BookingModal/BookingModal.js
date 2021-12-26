@@ -62,7 +62,7 @@ const BookingModal = ({ openModal, handleCloseModal, bookingData, date, setBooki
 
       // send to the server 
 
-      fetch('http://localhost:5000/appointments', {
+      fetch('https://whispering-springs-94088.herokuapp.com/appointments', {
 
       method: 'POST',
       headers: {
